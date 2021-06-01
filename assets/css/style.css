@@ -1,0 +1,17 @@
+table.contacts{
+width:100%;
+}
+table.contacts  tr  td + td + td + td{
+	text-align:right;
+}
+table.contacts tr:nth-child(2n){
+
+background-color:#f5f5f5;
+}
+
+input[type=text]{
+/*width:auto;*/
+}
+p.pagination *{
+	margin-right:5px;
+}
