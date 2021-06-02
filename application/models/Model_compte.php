@@ -18,7 +18,7 @@ class Model_compte extends CI_Model {
 			'cost' => 12,
 		];
 		$data['password'] = password_hash($data['password'], PASSWORD_BCRYPT, $options);
-		return	$this->db->insert('Compte', $data);
+		return $this->db->insert('Compte', $data);
 	}
 
 	function check_password($login, $password) {

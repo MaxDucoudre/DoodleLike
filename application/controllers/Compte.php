@@ -41,11 +41,18 @@ class Compte extends CI_Controller {
 				'password'=>$password
 			);
 
+
+
 			if	($this->model_compte->create_compte($data)){
-				$this->load->view('templates/header');
+				$this->load->view('templates/header_connected', $data);
 				$this->load->view('creer_compte_sucess', $data);
 				$this->load->view('templates/footer');
 			}
+
+			session_start();
+			$compte = $this->model_compte->getCompte($login);
+			$_SESSION['connected'] = true;
+			$_SESSION['compte'] = $compte;		
 		}
 	}
 

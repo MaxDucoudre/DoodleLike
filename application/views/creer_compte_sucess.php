@@ -5,7 +5,7 @@
 
 		<?php
 
-			echo form_open('doodlelike',array('method'=>'get','style'=>'text-align:left'));
-			echo form_submit('','Accueil');
+			echo form_open('./..',array('method'=>'get','style'=>'text-align:left'));
+			echo form_submit('','Retour');
 			echo form_close();
 		?>

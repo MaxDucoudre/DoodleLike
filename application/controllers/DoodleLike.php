@@ -12,16 +12,17 @@ class Doodlelike extends CI_Controller {
 			
 		session_start();
 
-		if($_SESSION['connected'] == true) {
+		if(isset($_SESSION['connected'])) {
+			if($_SESSION['connected'] == true) {
 
-			var_dump($_SESSION['connected']);
-			var_dump($_SESSION['compte']);
-
-
-			$this->load->view('templates/header_connected', $_SESSION['compte']);
-			
+				$this->load->view('templates/header_connected', $_SESSION['compte']);
+				
+			} else {
+				$this->load->view('templates/header');
+			}
 		} else {
-			$this->load->view('templates/header');
+				$this->load->view('templates/header');
+
 		}
 
 
@@ -29,3 +30,4 @@ class Doodlelike extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 }
+?>
