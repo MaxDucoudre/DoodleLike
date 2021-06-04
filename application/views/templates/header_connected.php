@@ -3,15 +3,12 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>DoodleLike</title>
-
-
 	</head>
-
 <body>
 
 	<header>
 
-		<h1> Compte connecté : <?=$nom?> <?=$prenom?></h1>
+		<h1> Compte connecté : <a href="/index"> <?=$nom?> <?=$prenom?></a></h1>
 
 		<?php
 

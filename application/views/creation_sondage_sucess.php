@@ -25,44 +25,71 @@
 
 		<button type="submit" id="envoyer" name="envoyer">Ajouter</button>
 		</br>
-
-</form>
+</fieldset>
+	</form>
 
 
 		<?php 
 		if($alldate != NULL) {
+			$i = 0;
 			foreach ($alldate as $date) {
+			$horaire = "horaire".$i;
 
-				form_open('sondage/add_horaire',array());
-				echo"</br>";
-				echo"<fieldset>";
-				echo"<legend>$date</legend>";
+				?>
+					<form action="add_horaire" method="get" accept-charset="utf8">
+				<?php
+
 				echo"
-					<label for='horaire'>Ajouter horaire</label>
-					";
+				</br>
+				<fieldset>
 
-					if(substr($date, 8, 2) == date('d')) {
-				
-						echo"
-						<input required type='time' id='horaire' name='horaire' min='date('H:i')' value='date('H:i')'>
-						";
+				<legend>$date</legend>
+				<label for='horaire'>Ajouter horaire </label>
+				";
+
+				if($date == date('d-m-Y')) {
+					?>
+						<input required type="time" id="<?=$horaire?>" name="<?=$horaire?>" min="<?php echo date('H:i');?>" value="<?php echo date('H:i');?>">
+					<?php
+
 					} else {
-						echo"
-						<input required type='time' id='horaire' name='horaire' value='date('H:i')'>
-						";
-					}
+					?>
+						<input required type="time" id="<?=$horaire?>" name="<?=$horaire?>" value="00:00">
+					<?php
 
+					}
+					
+					 $array_date[$i] = $date;
+					$i++;
+				echo"<button type='submit' id='envoyer_horaire' name='envoyer_horaire'>Ajouter horaire</button>";
+
+					if(isset($allhoraire)) {
+						foreach($allhoraire as $horaire) {
+							echo"<p>";
+
+							$this->load->model('model_date');
+							if($this->model_date->getDateWithId(substr($horaire,0,3)) == $date) {
+								echo substr($horaire,6,5);
+
+							}
+
+
+							
+							echo"</p>";
+						}
+					}
+					
 					echo"
-					<button type='submit' id='envoyer' name='envoyer'>Ajouter horaire</button>
-					";
+				</fieldset>
+				</form>";
 
-
-				echo"</fieldset>";
-				echo"</form>";
 					}
+				$_SESSION['dateAct'] = $array_date;
+
 				}
-		?>
-</fieldset>
+			?>
+
+
 </br>
 <!--
 		<label  for="horaire">Ajouter heure</label>
@@ -75,6 +102,6 @@
 
 		<?php
 			echo form_open('./../',array('method'=>'get','style'=>'text-align:left'));
-			echo form_submit('','Retour');
+			echo form_submit('','Accueil');
 			echo form_close();
 		?>

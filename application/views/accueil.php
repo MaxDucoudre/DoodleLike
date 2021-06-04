@@ -6,9 +6,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<h1>DoodleLike</h1>
 
 
-		<form>
-			<input type="button" value="Rejoindre sondage">
-		</form>
+
+		<?php
+		if (isset($badkey)) {
+			if($badkey) {
+				echo"Clé invalide ! ";
+			}
+		}
+
+			echo form_open('sondage/participate_sondage/',array('method'=>'get','style'=>'text-align:left'));
+		?>
+			<input value='<?=set_value('cle')?>' id='cle' name='cle' placeholder='Clé du sondage' required type='text'>
+
+		<?php
+			echo form_submit('','Rejoindre Sondage');
+			echo form_close();
+		?>
 
 <?php 		
 

@@ -11,7 +11,7 @@ class Doodlelike extends CI_Controller {
 		$this->load->library('form_validation');
 			
 		session_start();
-
+		
 		if(isset($_SESSION['connected'])) {
 			if($_SESSION['connected'] == true) {
 
