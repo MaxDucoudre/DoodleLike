@@ -17,6 +17,7 @@
 	<input value="<?=set_value('duree')?>" id="duree" name="duree" placeholder="Durée (minutes)"  required type="number">
 
 
+
 	<button type="submit" id="envoyer" name="envoyer">Créer</button>
 </fieldset>
 </form>

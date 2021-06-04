@@ -56,7 +56,6 @@ class Model_date extends CI_Model {
 			$date = $row['jour']."-".$row['mois']."-".$row['annee'];
 		}
 		return $date;
-
 	}
 
 	public function getIdDatefromDate($cle_sondage, $date) {

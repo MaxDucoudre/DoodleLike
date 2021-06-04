@@ -186,6 +186,7 @@ class Sondage extends CI_Controller {
 					$array_data['sondage'] = $sondage;
 					$array_data['compte'] = $compte;
 
+
 					$array_data['allhoraire'] = $this->model_horaire->getHoraireofSondage($sondage['cle']);
 
 					$this->load->view('templates/header_connected', $compte);
@@ -226,7 +227,13 @@ class Sondage extends CI_Controller {
 					$this->load->view('templates/header');
 				}
 
-				$this->load->view('participer_sondage');
+				$alldate = $this->model_date->getDatefromSondage($cle);
+				$allhoraire = $this->model_horaire->getHoraireofSondage($cle);
+				$array_data['alldate'] = $alldate;
+				$array_data['allhoraire'] = $allhoraire
+				$this->load->view('participer_sondage', $allhoraire);
+
+
 				$this->load->view('templates/footer');
 
 
