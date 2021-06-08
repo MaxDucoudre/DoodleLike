@@ -8,15 +8,19 @@ class Model_horaire extends CI_Model {
 	public $mois;
 	public $annee;
 	public $cle_sondage;
+	public $idHoraire;
 
 	public function __construct(){
 		$this->load->database();
+
 	}
 
 
-	public function addHoraire($data) {
+
+	public function ajouter_horaire($data) {
 		return $this->db->insert('Horaire', $data);
 	}
+
 
 
 	public function checkIfHoraireIsTaken($idDate, $horaire) {
@@ -61,12 +65,27 @@ class Model_horaire extends CI_Model {
 			$i++;
 			}
 			return $allhoraire;
+	}
 
+	public function getIdDateWithSondageAndHoraire($cle, $horaire) {
+
+			$minute = substr($horaire, 3, 2);
+			$heure = substr($horaire, 0, 2);
+
+		$query = $this->db->query("
+			SELECT idHoraire
+			FROM Horaire NATURAL JOIN Date NATURAL JOIN Sondage
+			WHERE cle='$cle' AND heure='$heure' AND minute='$minute';");
+		$row = $query->row();
+
+		foreach ($query->result_array() as $row) {
+			return $row['idHoraire'];
+		}
 	}
 
 	public function getHoraireofDate($idDate) {
 
-		$query = $this->db->query("SELECT minute,heure FROM Horaire WHERE idDate='$idDate';");
+		$query = $this->db->query("SELECT minute,heure FROM Horaire WHERE idDate='$idDate' ORDER BY heure ASC, minute ASC;");
 		$row = $query->row();
 		$i = 0;
 		$idHoraire = NULL;
@@ -85,6 +104,21 @@ class Model_horaire extends CI_Model {
 		}
 
 		return $idHoraire;
+	}
+
+	public function getidHoraireFromDateAndHoraire($idDate,$horaire) {
+
+		$minute = substr($horaire, 3, 2);
+		$heure = substr($horaire, 0, 2);
+		$query = $this->db->query("SELECT idHoraire FROM Horaire WHERE idDate='$idDate' AND heure='$heure' AND minute='minute';");
+
+		$row = $query->row();
+
+		foreach ($query->result_array() as $row) {
+			return $row['idHoraire'];
+
+
+		}
 	}
 
 

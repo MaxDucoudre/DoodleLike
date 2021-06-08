@@ -18,7 +18,6 @@ class Model_sondage extends CI_Model {
 
 	public function create_sondage($data) {
 		return	$this->db->insert('Sondage', $data);
-
 	}
 
 
@@ -34,6 +33,50 @@ class Model_sondage extends CI_Model {
 		} else {
 			return false;
 		}
+	}
+
+	public function getSondage($cle_sondage) {
+		$query = $this->db->query("SELECT titre,lieu,descriptif,duree,ouvert,idCompte FROM Sondage WHERE cle='$cle_sondage';");
+		$row = $query->row();
+		foreach ($query->result_array() as $sondage) {
+			return $sondage;
+		}
+		return null;
+	}
+
+	public function getSondageofCompte($idCompte) {
+		$query = $this->db->query("SELECT titre,lieu,descriptif,duree,cle,ouvert FROM Sondage WHERE idCompte='$idCompte';");
+		$row = $query->row();
+		$sondage_array;
+		$i=0;
+		foreach ($query->result_array() as $sondage) {
+			$sondage_array[$i] = $sondage;
+			$i++;
+		}
+		return $sondage_array;
+
+	}
+
+	public function fermer_sondage($cleSondage) {
+		$data = array(
+			'ouvert'=>FALSE
+		);
+		
+		$this->db->where('cle', $cleSondage);
+		$this->db->update('Sondage', $data);
+
+		$this->load->helper('url');
+	}
+
+	public function isOpen($cleSondage) {
+		$query = $this->db->query("SELECT ouvert FROM Sondage WHERE cle='$cleSondage';");
+		$row = $query->row();
+		foreach ($query->result_array() as $row) {
+			return $row["ouvert"];
+
+		}
+		return true;
+
 	}
 
 }

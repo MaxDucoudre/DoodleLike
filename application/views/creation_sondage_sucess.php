@@ -1,6 +1,6 @@
 
 
-<h2> Votre réunion :
+<h2> Votre réunion : </h2>
 	<h3>
 			Titre : <?=$sondage['titre']?>
 		</br>

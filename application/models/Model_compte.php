@@ -49,5 +49,16 @@ class Model_compte extends CI_Model {
 		return $row;
 	}
 
+	function getCompteNameWithId($idCompte) {
+		$query = $this->db->query("SELECT login,nom,prenom FROM Compte WHERE idCompte='$idCompte';");
+		$row = $query->row();
+
+		foreach ($query->result_array() as $row) {
+			return $row['login']." (".$row['prenom']." ".$row['nom'].")";
+		}
+
+		return null;
+	}
+
 }
 ?>

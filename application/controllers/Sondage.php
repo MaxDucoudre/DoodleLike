@@ -56,6 +56,7 @@ class Sondage extends CI_Controller {
 				'descriptif'=>$descriptif,
 				'duree'=>$duree,
 				'cle'=>$cle,
+				'ouvert'=>TRUE,
 				'idCompte'=>$compte['idCompte']
 			);
 
@@ -177,7 +178,7 @@ class Sondage extends CI_Controller {
 					'heure'=>$heure
 				);
 
-				if	($this->model_horaire->addHoraire($data)) {
+				if	($this->model_horaire->ajouter_horaire($data)) {
 
 					$compte = $_SESSION['compte'];
 					$alldate = $this->model_date->getDatefromSondage($sondage['cle']);
@@ -204,58 +205,187 @@ class Sondage extends CI_Controller {
 
 
 		public function participate_sondage() {	
-			$this->load->helper('form');		
+
+			$this->load->helper('form');
 			$this->load->library('form_validation');
+			$this->load->model('model_participant');
+			$this->load->model('model_reponse');
 			$this->load->model('model_date');
 			$this->load->model('model_horaire');
 			$this->load->model('model_sondage');
+
 			session_start();
 
+			$this->form_validation->set_rules('nom', 'Nom', 'required|trim');
+			$this->form_validation->set_rules('prenom', 'Prénom', 'required|trim');
 
-			if(!$this->model_sondage->check_cle($_GET['cle'])) {
 
-				if(isset($_SESSION['connected'])) {
-
-					if($_SESSION['connected'] == true) {
-						$this->load->view('templates/header_connected', $_SESSION['compte']);
-
-					} else {
-						$this->load->view('templates/header');
-					}
-
-				} else {
-					$this->load->view('templates/header');
+			if(isset($_GET['cle'])) {
+				if($_GET['cle'] != null) {
+					$cle = $_GET['cle'];
+					$_SESSION['cleParticipate'] = $cle;
 				}
-
-				$alldate = $this->model_date->getDatefromSondage($cle);
-				$allhoraire = $this->model_horaire->getHoraireofSondage($cle);
-				$array_data['alldate'] = $alldate;
-				$array_data['allhoraire'] = $allhoraire
-				$this->load->view('participer_sondage', $allhoraire);
-
-
-				$this->load->view('templates/footer');
-
-
-
-
-			} else { // si la clé est incorrect
-
-				$array_data['compte'] = $_SESSION['compte'];
-				$array_data['badkey'] = true;
-
-				if(isset($_SESSION['connected'])) {
-					if($_SESSION['connected']) {
-						$this->load->view('templates/header_connected', $_SESSION['compte']);
-					} else {
-						$this->load->view('templates/header', $_SESSION['compte']);
-					}
-				} else {
-					$this->load->view('templates/header', $_SESSION['compte']);
-				}
-				$this->load->view('accueil', $array_data);
-				$this->load->view('templates/footer');	
 			}
+			$cle = $_SESSION['cleParticipate'];
+
+
+			if(!$this->model_sondage->check_cle($cle)) {
+				if($this->model_sondage->isOpen($cle)) {
+
+					$alldate = $this->model_date->getDatefromSondage($cle);
+					$allhoraire = $this->model_horaire->getHoraireofSondage($cle);
+					$array_data['alldate'] = $alldate;
+					$array_data['allhoraire'] = $allhoraire;
+					$array_data['cleSondage'] = $cle;
+
+
+					if ($this->form_validation->run() === FALSE){
+						if(!isset($_SESSION['connected']) || !$_SESSION['connected']) {
+
+							$this->load->view('templates/header');
+						} else {
+							$compte = $_SESSION['compte'];
+							$this->load->view('templates/header_connected',$compte);
+						}
+
+						$this->load->view('participer_sondage', $array_data);
+						$this->load->view('templates/footer');
+
+					} else {
+
+						$nom = $this->input->post('nom');
+						$prenom = $this->input->post('prenom');
+
+						if(!isset($_SESSION['connected']) || !$_SESSION['connected']) { 
+							$idCompte = NULL;
+						} else {
+							$compte = $_SESSION['compte'];
+							$idCompte = $compte['idCompte'];
+						}
+
+						$data=array(
+							'nom'=>$nom,
+							'prenom'=>$prenom,
+							'idCompte'=>$idCompte
+						);
+
+						if(!$this->model_participant->isTaken($nom,$prenom) || !$this->model_participant->compteAlreadyParticipate($idCompte)) {
+
+							$this->model_participant->ajouter_Participant($data);
+
+							$horaire_array = $_SESSION['horaireAct'];
+
+							for($i=0;$i<$_SESSION['numberOfHoraire'];$i++) {
+
+								if($this->input->post($i) === "on") {
+								$idParticipant = $this->model_participant->getIdParticipant($nom,$prenom); // a refaire
+								$idHoraire = $this->model_horaire->getIdDateWithSondageAndHoraire($cle, $horaire_array[$i]);
+
+
+								$data_reponse=array(
+									'idParticipant'=>$idParticipant,
+									'idHoraire'=>$idHoraire,
+									'cle'=>$cle
+								);
+								$this->model_reponse->ajouter_Reponse($data_reponse);
+							}
+
+						}
+						$this->load->view('templates/header');
+						$this->load->view('participer_sondage_sucess');
+						$this->load->view('templates/footer');					
+					} else {
+						if(!isset($_SESSION['connected']) || !$_SESSION['connected']) {
+
+							$this->load->view('templates/header');
+						} else {
+							$compte = $_SESSION['compte'];
+							$this->load->view('templates/header_connected',$compte);
+						}
+						echo"Participation déjà enregistrée";
+
+						$this->load->view('participer_sondage', $array_data);
+						$this->load->view('templates/footer');
+					}
+
+
+				} 
+			} else {
+				if(!isset($_SESSION['connected']) || !$_SESSION['connected']) {
+
+					$this->load->view('templates/header');
+				} else {
+					$compte = $_SESSION['compte'];
+					$this->load->view('templates/header_connected',$compte);
+				}
+
+				$array_data['isclosed'] = true;
+				$this->load->view('accueil', $array_data);
+				$this->load->view('templates/footer');			
+			}
+
+		} else {
+
+			if(!isset($_SESSION['connected']) || !$_SESSION['connected']) {
+
+				$this->load->view('templates/header');
+			} else {
+				$compte = $_SESSION['compte'];
+				$this->load->view('templates/header_connected',$compte);
+			}
+
+			$array_data['badkey'] = true;
+			$this->load->view('accueil', $array_data);
+			$this->load->view('templates/footer');
 		}
 	}
+
+
+	public function results() {
+
+
+		session_start();
+		
+		$this->load->helper('form');
+
+		$this->load->model('model_sondage');
+		$this->load->model('model_horaire');
+		$this->load->model('model_date');
+		$this->load->model('model_reponse');
+
+
+
+
+		$sondage = $this->model_sondage->getSondage($_GET['cle']);
+		$sondage['cle'] = $_GET['cle'];
+		$array_data;
+
+		if(isset($_SESSION['compte']) || $_SESSION['connected'] == true) {
+			$compte = $_SESSION['compte'];
+
+			$this->load->view('templates/header_connected', $compte);
+		} else {
+			$this->load->view('templates/header');
+		}
+
+
+		if(!$this->model_sondage->isOpen($_GET['cle'])) {
+			$this->load->view('result_sondage', $sondage);
+
+		} else if($this->model_sondage->check_cle($_GET['cle'])) {
+			$array_data['isActive'] = true;
+			$array_data['badkey'] = true;
+			$this->load->view('accueil', $array_data);
+
+		} else {
+			$array_data['badkey'] = false;
+			$array_data['isActive'] = false;
+			$this->load->view('accueil', $array_data);
+		}
+		
+			$this->load->view('templates/footer');
+
+
+	}
+}
 	?>
