@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>DoodleLike</title>
-		<link href="http://dwarves.iut-fbleau.fr/~ducoudre/DoodleLike/assets/css/style.css" rel="stylesheet">
+		<link href="http://dwarves.iut-fbleau.fr/~ducoudre/DoodleLike/assets/css/style.css" rel="stylesheet" type="text/css">
+      	<link href="././css/style.css" rel="stylesheet" type="text/css">
 		<?php echo link_tag('assets/css/style.css', 'icon', 'text/css');?>
 
 	</head>
