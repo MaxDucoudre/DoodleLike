@@ -4,7 +4,6 @@
 		<meta charset="UTF-8" />
 		<title>DoodleLike</title>
 		<link href="http://dwarves.iut-fbleau.fr/~ducoudre/DoodleLike/assets/css/style.css" rel="stylesheet" type="text/css">
-      	<link href=".././css/style.css" rel="stylesheet" type="text/css">
 		<?php echo link_tag('assets/css/style.css', 'icon', 'text/css');?>
 
 	</head>
@@ -14,6 +13,8 @@
 	<header>
 
 		<?php
+      		echo '<link href="http://dwarves.iut-fbleau.fr/~ducoudre/DoodleLike/assets/css/style.css" rel="stylesheet" type="text/css">';
+      
 			echo form_open('compte/create_compte',array('method'=>'get','style'=>'text-align:left'));
 			echo form_submit('','Créer un compte');
 			echo form_close();
