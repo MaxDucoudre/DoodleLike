@@ -23,23 +23,5 @@
 			echo form_submit('','Se connecter');
 			echo form_close();
 		?>
-      
-    <a href="index.html">
-    <h4 class="logo">Doodle Like</h4>
-    </a>
-    <nav>
-      <ul>
-        <li>
-			<a href="index.html">
-				<button class="button2" id="Accueil">Accueil</button>
-			</a>
-        </li>
-        <li>
-			<a href="SeConnecter.html">
-          <button class="button2" id="connexion">Se connecter</button>
-			</a>
-        </li>
-      </ul>
-    </nav>
 	</header>
 	<main>
