@@ -3,7 +3,9 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>DoodleLike</title>
-		<link rel="stylesheet" href="<?=base_url('assets/css/style.css');?>">
+		<link href="http://dwarves.iut-fbleau.fr/~ducoudre/DoodleLike/assets/css/style.css" rel="stylesheet">
+
+		<?php echo link_tag('assets/css/style.css', 'icon', 'text/css');?>
 	</head>
 <body>
 

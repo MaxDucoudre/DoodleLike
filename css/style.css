@@ -10,6 +10,12 @@ body {
 	font-style: normal;
 	font-weight: 200;
 }
+
+
+h1 {
+		background-color: #FFF111;
+
+}
 /* Container */
 .container {
 	width: 90%;
