@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <p class="tagline">Créé ou rejoindre un sondage</p>
 </section>
 
-
+<p>cecui est un test</p>
 
 		<?php
 		if (isset($badkey)) {
