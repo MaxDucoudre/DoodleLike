@@ -4,7 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <link href="././css/style.css" rel="stylesheet" type="text/css">
 
-		<h1>DoodleLike</h1>
+<section class="hero" id="hero">
+    <h2 class="hero_header">Doodle <span class="light">Like</span></h2>
+    <p class="tagline">Créé ou rejoindre un sondage</p>
+</section>
 
 
 
