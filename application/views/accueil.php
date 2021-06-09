@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
+<link href="././css/style.css" rel="stylesheet" type="text/css">
 
 		<h1>DoodleLike</h1>
 
