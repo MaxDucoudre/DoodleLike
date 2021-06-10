@@ -1,9 +1,13 @@
 <?=validation_errors()?>
 
+<div class="containerfooter">
 
 <?=form_open('sondage/participate_sondage/',array())?>
-<fieldset>
-	<legend>Participer au sondage</legend>
+
+  <section class="hero" id="hero">
+    <h2 class="hero_header">Doodle <span class="light">Like</span></h2><br>
+    <p class="tagline">Participer au sondage</p>
+  </section>
 
 	<?php
 	$compte = $_SESSION['compte'];
@@ -13,31 +17,31 @@
 	if(isset($_SESSION['connected'])) {
 		if($_SESSION['connected']) {
 			?>
-			<label  for='nom'>Nom</label>
+			<h2 class="info">Nom :</h2>
 			<input value="<?=$compte['nom']?>" id='nom' name='nom' placeholder='Nom' required type='text'>
 		</br>
 
-		<label  for='prenom'>Prénom</label>
+		<h2 class="info">Prenom :</h2>
 		<input value="<?=$compte['prenom']?>" id='prenom' name='prenom' placeholder='Prénom' required type='text'>
 		<?php
 	} else {
 		?>
-		<label  for='nom'>Nom</label>
+		<h2 class="info">Nom :</h2>
 		<input id='nom' name='nom' placeholder='Nom' required type='text'>
 	</br>
 
-	<label  for='prenom'>Prénom</label>
+	<h2 class="info">Prenom :</h2>
 	<input id='prenom' name='prenom' placeholder='Prénom' required type='text'>
 	<?php
 
 }
 } else {
 	?>
-	<label  for='nom'>Nom</label>
+	<h2 class="info">Nom :</h2>
 	<input id='nom' name='nom' placeholder='Nom' required type='text'>
 </br>
 
-<label  for='prenom'>Prénom</label>
+<h2 class="info">Prenom :</h2>
 <input id='prenom' name='prenom' placeholder='Prénom' required type='text'>
 <?php
 }
@@ -81,15 +85,7 @@ $_SESSION['horaireAct'] = $horaire_array;
 
 
 
-<button type="submit" id="envoyer" name="envoyer">Valider</button>
+<button type="submit" id="envoyer" name="envoyer" class="input2">Valider</button>
 
-</fieldset>
+
 </form>
-
-
-
-<?php
-echo form_open('./../',array('method'=>'get','style'=>'text-align:left'));
-echo form_submit('','Accueil');
-echo form_close();
-?>

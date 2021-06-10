@@ -1,15 +1,16 @@
 <?=validation_errors()?>
+ <div class="containerfooter"> 
 
-</br>
-Titre : <?=$titre?> 
-</br>
-Lieu : <?=$lieu?>
-</br>
-Description : <?=$descriptif?>
-</br>
-Durée : <?=$duree?> minutes
-</br>
-Clé d'accès : <?=$cle?>
+</br><p class="titre"><p class="titre"><?=$titre?></p>
+
+</br><h4>
+Lieu : <?=$lieu?></h4>
+<h4>
+Description : <?=$descriptif?></h4>
+<h4>
+Durée : <?=$duree?> minutes</h4>
+<h4>
+Clé d'accès : <?=$cle?></h4>
 
 
 <?php
@@ -53,14 +54,5 @@ foreach($alldate as $date) {
 
 
 
-?>
-
-
-
-<?php			
-echo"</br>";
-echo form_open('./../',array('method'=>'get','style'=>'text-align:left'));
-echo form_submit('','Accueil');
-echo form_close();
 ?>
 

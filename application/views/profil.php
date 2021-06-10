@@ -1,52 +1,50 @@
 <?=validation_errors()?>
+ <div class="containerfooter"> 
 
 <?php
 		$all_SondageofCompte = $this->model_sondage->getSondageofCompte($idCompte);
 
-echo"<h2>Vos sondages : </h2>";
+echo"<h2 class='sondage'>Vos sondages : </h2>";
 foreach($all_SondageofCompte as $sondage) {
-
+ echo "<fieldset>";
 ?>
-	<h3>
+	
 		<?php
 		if($sondage['ouvert'] == FALSE) {
-			echo"Statut : FERME";
+
+		echo"<p class='testfermer'>FERME</p>";
 		} else {
-			echo"Statut : OUVERT";
+
+			echo"<p class='testouvert'>OUVERT</p>";
 		}
 
 
 	?>
+
 		</br>
-			Titre : <?=$sondage['titre']?> 
+			<p class="titre"><?=$sondage['titre']?></p>
 		</br>
-			Lieu : <?=$sondage['lieu']?>
-		</br>
-			Description : <?=$sondage['descriptif']?>
-		</br>
-			Durée : <?=$sondage['duree']?> minutes
-		</br>
-			Clé d'accès : <?=$sondage['cle']?>
-	</h3>
+			<h4>
+				Lieu : <?=$sondage['lieu']?></h4>
+			<h4>Description : <?=$sondage['descriptif']?></h4>
+			<h4>Durée : <?=$sondage['duree']?> minutes</h4>
+			<h4>Clé d'accès : <?=$sondage['cle']?></h4>
+	</p>
 	<?php
 				$cle = $sondage['cle'];
 
 		if($sondage['ouvert'] == TRUE) {
 			echo"<form action='clore_sondage/$cle' method='get' accept-charset='utf8'>";
 
-			echo form_submit('','Clore le sondage');
+			echo form_submit('','Clore le sondage','class="input3"');
 			echo form_close();
 		} else {
 			
 			echo"<form action='resultat_sondage/$cle' method='get' accept-charset='utf8'>";
-			echo form_submit('','Voir le résultat');
+			echo form_submit('','Voir le résultat','class="input3"');
 			echo form_close();
 		}
+		echo "</fieldset>";
 }
-
-
-			echo"</br>";
-			echo form_open('./../',array('method'=>'get','style'=>'text-align:left'));
-			echo form_submit('','Accueil');
-			echo form_close();
+	
 		?>
