@@ -1,19 +1,23 @@
+  
+<div class="containerfooter"> 
+  <section class="hero" id="hero">
+    <h2 class="hero_header">Doodle <span class="light">Like</span></h2><br>
+    <p class="tagline">Votre réunion :</p>
+  </section>
 
-
-<h2> Votre réunion : </h2>
-	<h3>
-			Titre : <?=$sondage['titre']?>
+  		</br>
+			<p class="titre"><?=$sondage['titre']?></p>
 		</br>
-			Lieu : <?=$sondage['lieu']?>
-		</br>
-			Description : <?=$sondage['descriptif']?>
-		</br>
-			Durée : <?=$sondage['duree']?> minutes
-		</br>
-			Clé d'accès : <?=$sondage['cle']?>
-		</br>
-			Créateur : <?=$login?> (<?=$prenom?> <?=$nom?>)
-	</h3>
+		<h4>
+			Lieu : <?=$sondage['lieu']?></h4>
+		<h4>
+			Description : <?=$sondage['descriptif']?></h4>
+		<h4>
+			Durée : <?=$sondage['duree']?> minutes</h4>
+		<h4>
+			Clé d'accès : <?=$sondage['cle']?></h4>
+		<h4>
+			Créateur : <?=$login?> (<?=$prenom?> <?=$nom?>)</h4>
 
 <?=form_open('sondage/add_date',array());?>
 <fieldset>
@@ -23,7 +27,7 @@
 		<label  for="date">Ajouter jour</label>
 		<input required type="date" id="date" name="date" value="<?php echo date('Y-m-d');?>" min="<?php echo date('Y-m-d');?>" max="2030-01-01" >
 
-		<button type="submit" id="envoyer" name="envoyer">Ajouter</button>
+		<button type="submit" id="envoyer" name="envoyer" class="input2">Ajouter</button>
 		</br>
 </fieldset>
 	</form>
@@ -61,7 +65,7 @@
 					
 					 $array_date[$i] = $date;
 					$i++;
-				echo"<button type='submit' id='envoyer_horaire' name='envoyer_horaire'>Ajouter horaire</button>";
+				echo"<button type='submit' id='envoyer_horaire' name='envoyer_horaire 'class='input2''>Ajouter horaire</button>";
 
 					if(isset($allhoraire)) {
 						foreach($allhoraire as $horaire) {
@@ -102,6 +106,6 @@
 
 		<?php
 			echo form_open('./../',array('method'=>'get','style'=>'text-align:left'));
-			echo form_submit('','Accueil');
+			echo form_submit('','Retour','class="input3"');
 			echo form_close();
 		?>
