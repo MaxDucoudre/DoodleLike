@@ -2,26 +2,34 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 ?>
-<link href="././css/style.css" rel="stylesheet" type="text/css">
 
+<!-- Main -->
+<div class="container"> 
+
+  <!-- Accueil Section -->
+  <section class="hero" id="hero">
+    <h2 class="hero_header">Doodle <span class="light">Like</span></h2>
+    <p class="tagline">Créé ou rejoindre un sondage</p>
+  </section>
+  <!-- Section sur les sondages -->
 		<?php
 		if (isset($badkey)) {
 			if($badkey) {
-				echo"Clé invalide !";
-				echo"</br>";
+				echo"<p class='invalidecle'>Clé invalide !</p>";
+			    
 			}
 		}
 
 		if (isset($isActive)) {
 			if(!$isActive) {
-				echo"Sondage encore actif !";
+				echo"<p class='invalidecle'>Sondage encore actif !</p>";
 				echo"</br>";
 			}
 		}
 
 		if (isset($isclosed)) {
 			if($isclosed) {
-				echo"Sondage cloturé !";
+				echo"<p class='invalidecle'>Sondage cloturé !</p>";
 				echo"</br>";
 			}
 		}
@@ -29,10 +37,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			echo form_open('sondage/participate_sondage/',array('method'=>'get','style'=>'text-align:left'));
 		?>
+
+		
 			<input value='<?=set_value('cle')?>' id='cle' name='cle' placeholder='Clé du sondage' required type='text'>
 
 		<?php
-			echo form_submit('','Rejoindre Sondage');
+			echo"</br>";
+			echo form_submit('','Rejoindre Sondage','class="input3"');
 			echo form_close();
 			echo"</br>";
 
@@ -42,8 +53,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		?>
 			<input value='<?=set_value('cle')?>' id='cle' name='cle' placeholder='Clé du sondage' required type='text'>
 
+
 		<?php
-			echo form_submit('','Afficher Résultats');
+			echo"</br>";
+			echo form_submit('','Afficher Résultats','class="input3"');
 			echo form_close();
 			echo"</br>";
 		?>
@@ -58,9 +71,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		if($_SESSION['connected'] == true) {
 
 				echo form_open('sondage/create_sondage',array('method'=>'get','style'=>'text-align:left'));
-				echo form_submit('','Créer sondage');
+				echo form_submit('','Créer sondage','class="input3"');
 				echo form_close();
 		}
 	}
 
 ?>
+
+
