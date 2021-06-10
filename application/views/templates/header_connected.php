@@ -3,26 +3,49 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>DoodleLike</title>
-		<link href="../css/style.css" rel="stylesheet" type="text/css">
-      <link href="http://dwarves.iut-fbleau.fr/~ducoudre/DoodleLike/assets/css/style.css" rel="stylesheet" type="text/css">
-
-		<?php echo link_tag('assets/css/style.css', 'icon', 'text/css');?>
+		<?php 
+		echo link_tag('css/style.css');
+		?>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 <body>
 
 	<header>
+		 <h4 class="logo">Doodle Like <span class="light"><?=$nom?> <?=$prenom?></span></h4>
+		
 
-		<h1> Compte connecté : <?=$nom?> <?=$prenom?></h1>
+  	<nav>
+  		<ul>
+  			  <li>
 
-		<?php
-			echo form_open('compte/profil',array('method'=>'get','style'=>'text-align:left'));
-			echo form_submit('','Profil');
+  			<?php
+			echo form_open('./../',array('method'=>'get','style'=>'text-align:left'));
+			echo form_submit('','Accueil','class="input1"');
 			echo form_close();
+			?>
+  			</li>
+
+  			<li>
+		  		<?php
+					echo form_open('compte/profil',array('method'=>'get','style'=>'text-align:left'));
+					echo form_submit('','Profil','class="input1"');
+					echo form_close();
+
+				?>
+	</li><li>
+		       			<?php
 
 			echo form_open('compte/disconnect_compte',array('method'=>'get','style'=>'text-align:left'));
-			echo form_submit('','Déconnexion');
+			echo form_submit('','Déconnexion','class="input1"');
 			echo form_close();
 		?>
+  	
+  			</li>
+
+  		</ul>
+  	</nav>
+
 
 	</header>
 	<main>
