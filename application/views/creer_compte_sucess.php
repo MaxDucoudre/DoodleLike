@@ -5,7 +5,7 @@
     <p class="tagline">Bonjour <?=$nom?> <?=$prenom?> ! Connection réussie</p>
 
     <?php
-			echo form_open('./../',array('method'=>'get','style'=>'text-align:left'));
+			echo form_open('./',array('method'=>'get','style'=>'text-align:left'));
 			echo form_submit('','Retour','class="input3"');
 			echo form_close();
 		?>

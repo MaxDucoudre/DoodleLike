@@ -40,6 +40,7 @@ class Sondage extends CI_Controller {
 			$lieu = $this->input->post('lieu');
 			$duree = $this->input->post('duree');
 			$descriptif = $this->input->post('descriptif');
+			$ouvert = FALSE;
 
 
 			$permitted_chars = '0123456789abcdef';
@@ -73,6 +74,28 @@ class Sondage extends CI_Controller {
 		}
 	}
 
+/*
+	public function ouvrir() {
+			$this->load->model('model_sondage');
+
+			if(!isset($_SESSION['connected']) || !$_SESSION['connected']) {
+
+				$this->load->view('templates/header');
+			} else {
+				$compte = $_SESSION['compte'];
+				$this->load->view('templates/header_connected',$compte);
+			}
+
+			$array_data['badkey'] = true;
+			$this->load->view('accueil', $array_data);
+			$this->load->view('templates/footer');
+		}
+		$sondage = $_SESSION['sondage'];
+
+		$this->model_sondage->open($sondage['cle'])
+
+	}
+*/
 
 	public function add_date() {
 		$this->load->helper('form');		

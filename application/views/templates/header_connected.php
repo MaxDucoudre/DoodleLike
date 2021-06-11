@@ -20,7 +20,7 @@
   			  <li>
 
   			<?php
-			echo form_open('./../',array('method'=>'get','style'=>'text-align:left'));
+			echo form_open('./',array('method'=>'get','style'=>'text-align:left'));
 			echo form_submit('','Accueil','class="input1"');
 			echo form_close();
 			?>
@@ -29,7 +29,7 @@
   			<li>
 		  		<?php
 					echo form_open('compte/profil',array('method'=>'get','style'=>'text-align:left'));
-					echo form_submit('','Profil','class="input1"');
+					echo form_submit('','Vos sondages','class="input1"');
 					echo form_close();
 
 				?>

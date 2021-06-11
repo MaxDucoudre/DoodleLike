@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <!-- Main -->
-<div class="container"> 
+<div class="containerfooter"> 
 
   <!-- Accueil Section -->
   <section class="hero" id="hero">
@@ -39,18 +39,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		?>
 
 		
+			<h2 class="sondage">Rejoindre sondage</h2>
 			<input value='<?=set_value('cle')?>' id='cle' name='cle' placeholder='Clé du sondage' required type='text'>
+
+
 
 		<?php
 			echo"</br>";
 			echo form_submit('','Rejoindre Sondage','class="input3"');
 			echo form_close();
-			echo"</br>";
 
 
 
 			echo form_open('sondage/results/',array('method'=>'get','style'=>'text-align:left'));
 		?>
+			<h2 class="sondage">Afficher résultats</h2>
+
 			<input value='<?=set_value('cle')?>' id='cle' name='cle' placeholder='Clé du sondage' required type='text'>
 
 
@@ -58,7 +62,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo"</br>";
 			echo form_submit('','Afficher Résultats','class="input3"');
 			echo form_close();
-			echo"</br>";
 		?>
 
 
@@ -70,7 +73,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	if(isset($_SESSION['connected'])) {
 		if($_SESSION['connected'] == true) {
 
+
 				echo form_open('sondage/create_sondage',array('method'=>'get','style'=>'text-align:left'));
+			?>
+			<h2 class="sondage">Créer Sondage</h2>
+
+			<?php
 				echo form_submit('','Créer sondage','class="input3"');
 				echo form_close();
 		}

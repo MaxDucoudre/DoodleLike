@@ -10,6 +10,15 @@
     <p class="tagline">Connection à DoodleLike</p>
   </section>
 
+<?php
+	if(isset($_SESSION['badpassword'])) {
+		if($_SESSION['badpassword']) {
+			echo"<p class='invalidecle'>Identifiants incorrects !</p>";
+
+		}
+	}
+?>
+
 	<h2 class="info">Login :</h2>
 	<input value="<?=set_value('login')?>" id="login" name="login" placeholder="Login"  required type="text">
 	<br>

@@ -37,6 +37,9 @@
 		if($alldate != NULL) {
 			$i = 0;
 			foreach ($alldate as $date) {
+
+				echo"<fieldset>";
+
 			$horaire = "horaire".$i;
 
 				?>
@@ -45,13 +48,14 @@
 
 				echo"
 				</br>
-				<fieldset>
 
 				<legend>$date</legend>
 				<label for='horaire'>Ajouter horaire </label>
 				";
 
 				if($date == date('d-m-Y')) {
+				echo"<fieldset>";
+
 					?>
 						<input required type="time" id="<?=$horaire?>" name="<?=$horaire?>" min="<?php echo date('H:i');?>" value="<?php echo date('H:i');?>">
 					<?php
@@ -82,10 +86,15 @@
 							echo"</p>";
 						}
 					}
+					echo"</fieldset>";
+					echo"</br>";
+
 					
 					echo"
-				</fieldset>
 				</form>";
+
+				echo"</fieldset>";
+				echo"</br>";
 
 					}
 				$_SESSION['dateAct'] = $array_date;
@@ -105,7 +114,7 @@
 
 
 		<?php
-			echo form_open('./../',array('method'=>'get','style'=>'text-align:left'));
-			echo form_submit('','Retour','class="input3"');
+			echo form_open('sondage/ouvrir',array('method'=>'get','style'=>'text-align:left'));
+			echo form_submit('','Valider','class="input3"');
 			echo form_close();
 		?>

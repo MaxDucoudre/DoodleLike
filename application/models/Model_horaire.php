@@ -89,6 +89,7 @@ class Model_horaire extends CI_Model {
 		$row = $query->row();
 		$i = 0;
 		$idHoraire = NULL;
+
 		foreach ($query->result_array() as $row) {
 
 			if(strlen($row['heure']) == 1) {
@@ -102,8 +103,11 @@ class Model_horaire extends CI_Model {
 			$idHoraire[$i] = $idDate." ".$row['heure'].":".$row['minute'];
 			$i++;
 		}
-
+		if($query->num_rows() == 0) {
+			return null;
+		} else {
 		return $idHoraire;
+		}
 	}
 
 	public function getidHoraireFromDateAndHoraire($idDate,$horaire) {

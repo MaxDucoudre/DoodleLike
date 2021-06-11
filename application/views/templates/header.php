@@ -23,7 +23,7 @@
   			<li>
 
   			<?php
-			echo form_open('./../',array('method'=>'get','style'=>'text-align:left'));
+			echo form_open('./',array('method'=>'get','style'=>'text-align:left'));
 			echo form_submit('','Accueil','class="input1"');
 			echo form_close();
 			?>

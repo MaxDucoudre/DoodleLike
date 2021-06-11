@@ -45,7 +45,7 @@ class Model_sondage extends CI_Model {
 	}
 
 	public function getSondageofCompte($idCompte) {
-		$query = $this->db->query("SELECT titre,lieu,descriptif,duree,cle,ouvert FROM Sondage WHERE idCompte='$idCompte';");
+		$query = $this->db->query("SELECT titre,lieu,descriptif,duree,cle,ouvert FROM Sondage WHERE idCompte='$idCompte' ORDER BY ouvert DESC;");
 		$row = $query->row();
 		$sondage_array;
 		$i=0;
@@ -53,9 +53,15 @@ class Model_sondage extends CI_Model {
 			$sondage_array[$i] = $sondage;
 			$i++;
 		}
-		return $sondage_array;
 
+		if(!isset($sondage_array)) {
+			return null;
+		} else {
+			return $sondage_array;
+		}
 	}
+
+
 
 	public function fermer_sondage($cleSondage) {
 		$data = array(
@@ -76,7 +82,10 @@ class Model_sondage extends CI_Model {
 
 		}
 		return true;
+	}
 
+	public function open($clesondage) {
+		
 	}
 
 }

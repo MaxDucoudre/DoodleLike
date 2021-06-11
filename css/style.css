@@ -16,6 +16,22 @@ h1 {
 		background-color: #FFF111;
 
 }
+
+p {
+	
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	color:red;
+}
+
+fieldset {
+	    border:2px solid black;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;	
+    border-radius:8px;	
+}
+
 /* Container */
 .container {
 	width: 90%;
